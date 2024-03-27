@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "discord-template"
+version = "0.1.0"
+description = ""
+authors = ["Selix <asel1x@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+discord-py = "^2.3.2"
+sqlalchemy = "^2.0.28"
+pydantic-settings = "^2.2.1"
+asyncpg = "^0.29.0"
+greenlet = "^3.0.3"
+loguru = "^0.7.2"
+alembic = "^1.13.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
