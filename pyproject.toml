@@ -6,14 +6,15 @@ authors = ["Selix <asel1x@icloud.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-discord-py = "^2.3.2"
-sqlalchemy = "^2.0.28"
-pydantic-settings = "^2.2.1"
+python = "^3.12"
+sqlmodel = "^0.0.19"
+discord = "^2.3.2"
+alembic = "^1.13.2"
+loguru = "^0.7.2"
+pydantic-settings = "^2.3.4"
 asyncpg = "^0.29.0"
 greenlet = "^3.0.3"
-loguru = "^0.7.2"
-alembic = "^1.13.1"
+pre-commit = "^3.7.1"
 
 
 [build-system]

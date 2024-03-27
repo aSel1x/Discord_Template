@@ -7,9 +7,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from discord import Interaction, app_commands
 from discord.ext import commands
 
-from . import cogs
-from .core import settings, sign_all
-from .database import Database
+from bot import cogs
+from bot.core import settings, sign_all
+from bot.core.db import Database
 
 
 class CustomBot(commands.Bot):
@@ -24,9 +24,9 @@ class CustomBot(commands.Bot):
 
     async def setup_hook(self) -> None:
         for package in cogs.__all__:
-            for cog in import_module("cogs." + package).__all__:
+            for cog in import_module('bot.cogs.' + package).__all__:
                 logger.info(f"Loading extension: {package}:{cog}")
-                await self.load_extension(name=f"cogs.{package}.{cog}")
+                await self.load_extension(name=f"bot.cogs.{package}.{cog}")
 
     async def on_command_error(self, ctx: commands.Context, error) -> None:
         if isinstance(error, commands.errors.MissingRequiredArgument):
@@ -43,5 +43,5 @@ class CustomBot(commands.Bot):
             traceback.print_exception(type(error), error, error.__traceback__)
 
     async def on_ready(self) -> None:
-        asyncio.create_task(sign_all(self), name="sign")
+        asyncio.create_task(sign_all(self), name='sign')
         logger.info(f"Logged in as: {self.user.name}, prefix: {self.command_prefix.__str__()}.")

@@ -5,6 +5,6 @@ from . import (
 
 
 __all__ = (
-    "cogs",
-    "app_commands",
+    'cogs',
+    'app_commands',
 )

@@ -1,4 +1,4 @@
-from pydantic import Field, PostgresDsn, field_validator
+from pydantic import PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -7,19 +7,14 @@ class Settings(BaseSettings):
         env_file=('.env.dev', '.env')
     )
 
-    DISCORD_BOT_PREFIX: str = Field(default='')
-    DISCORD_BOT_TOKEN: str = Field(min_length=1)
+    DISCORD_BOT_PREFIX: str
+    DISCORD_BOT_TOKEN: str
 
-    POSTGRES_USER: str = Field(default='postgres')
-    POSTGRES_PASSWORD: str = Field(default='postgres')
-    POSTGRES_HOST: str = Field(default='postgres')
-    POSTGRES_PORT: int = Field(default=5432)
-    POSTGRES_DB: str = Field(default='postgres')
-
-    @field_validator('POSTGRES_HOST', mode='before')
-    @classmethod
-    def validate_postgres_host(cls, v: str):
-        return 'postgres' if v == '' else v
+    POSTGRES_USER: str = 'postgres'
+    POSTGRES_PASSWORD: str = 'postgres'
+    POSTGRES_HOST: str = 'postgres'
+    POSTGRES_PORT: int = 5432
+    POSTGRES_DB: str = 'postgres'
 
     @property
     def pg_dsn(self) -> PostgresDsn:

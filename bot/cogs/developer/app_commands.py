@@ -1,34 +1,28 @@
-from typing import TYPE_CHECKING, Literal, Optional
+from typing import Literal
 
-from discord import Object, HTTPException
+from discord import HTTPException, Object
 from discord.ext import commands
 
-from bot.cogs.abc import AbstractCog
-
-if TYPE_CHECKING:
-    from bot import CustomBot
+from bot.cogs.abc import AbcCog
 
 
-class DeveloperAppCmdCog(AbstractCog, name="DeveloperAppCommandsCog"):
+class DeveloperAppCmdCog(AbcCog):
 
-    def __init__(self, bot: 'CustomBot'):
-        super().__init__(bot)
-
-    @commands.command(name="sync")
+    @commands.command(name='sync')
     @commands.guild_only()
     @commands.is_owner()
     async def sync(self,
                    ctx: commands.Context,
                    guilds: commands.Greedy[Object],
-                   spec: Optional[Literal["~", "*", "^"]] = None
+                   spec: Literal['~', '*', '^'] | None = None
                    ) -> None:
         if not guilds:
-            if spec == "~":
+            if spec == '~':
                 synced = await ctx.bot.tree.sync(guild=ctx.guild)
-            elif spec == "*":
+            elif spec == '*':
                 ctx.bot.tree.copy_global_to(guild=ctx.guild)
                 synced = await ctx.bot.tree.sync(guild=ctx.guild)
-            elif spec == "^":
+            elif spec == '^':
                 ctx.bot.tree.clear_commands(guild=ctx.guild)
                 await ctx.bot.tree.sync(guild=ctx.guild)
                 synced = []

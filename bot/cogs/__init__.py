@@ -6,7 +6,7 @@ from . import (
 
 
 __all__ = (
-    "user",
-    "admin",
-    "developer",
+    'user',
+    'admin',
+    'developer',
 )

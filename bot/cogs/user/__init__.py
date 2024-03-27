@@ -4,5 +4,5 @@ from . import (
 
 
 __all__ = (
-    "wallet",
+    'wallet',
 )
