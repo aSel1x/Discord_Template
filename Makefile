@@ -16,14 +16,17 @@ ref: poetry run pre-commit run --all-files
 
 .PHONY: run
 run:
-	poetry run python -m bot
+	set -a; source .env; set +a; \
+	poetry run python -m app.main
 
 .PHONY: migrate
 migrate:
+	set -a; source .env; set +a; \
 	poetry run alembic upgrade head
 
 .PHONY: generate
 generate:
+	set -a; source .env; set +a; \
 	poetry run alembic revision --autogenerate
 
 .PHONY: req
